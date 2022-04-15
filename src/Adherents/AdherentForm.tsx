@@ -2,7 +2,16 @@ import { getCommunes } from '@/api/communes'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { FC, useState, useEffect } from 'react'
-import { DateInput, SimpleForm, TextInput, SelectInput, SelectInputProps } from 'react-admin'
+import {
+  DateInput,
+  SimpleForm,
+  TextInput,
+  SelectInput,
+  SelectInputProps,
+  ReferenceArrayInput,
+  SelectArrayInput,
+  ChipField
+} from 'react-admin'
 import { useWatch } from 'react-hook-form'
 
 const Separator = () => <Box pt='1em' />
@@ -65,7 +74,11 @@ const AdherentForm: FC<AdherentFormProps> = ({ onSubmit }) => {
       <Typography variant='h6' gutterBottom>
         Activités
       </Typography>
-      <TextInput source='activity' isRequired fullWidth label='Activité(s)' />
+      <ReferenceArrayInput source='activity' reference='activites'>
+        <SelectArrayInput label='Activité(s)' fullWidth isRequired>
+          <ChipField source='name' />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
     </SimpleForm>
   )
 }

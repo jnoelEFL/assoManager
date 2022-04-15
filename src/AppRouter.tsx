@@ -15,14 +15,20 @@ type ThemeName = 'dark' | 'light'
 
 const AppRouter = () => {
   const dataProvider = localStorageDataProvider({
-    defaultData: defaultMockData
+    defaultData: process.env.NODE_ENV === 'development' ? defaultMockData : undefined
   })
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const [theme] = useLocalStorage<ThemeName>('theme', prefersDarkMode ? 'dark' : 'light', true)
 
   return (
-    <Admin dataProvider={dataProvider} dashboard={Dashboard} layout={CustomLayout} theme={createThemeHelper(theme)}>
+    <Admin
+      dataProvider={dataProvider}
+      dashboard={Dashboard}
+      layout={CustomLayout}
+      theme={createThemeHelper(theme)}
+      title='AssoManager'
+    >
       <Resource
         name='adherents'
         list={AdherentsList}
