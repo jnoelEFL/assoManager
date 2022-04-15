@@ -10,6 +10,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useLocalStorage } from '@caldwell619/react-hooks'
 import { createThemeHelper } from './themes'
 import { ActiviteCreate, ActiviteEdit, ActivitesList } from './Activites'
+import { i18nProvider } from './i18n/i18nProvider'
 
 type ThemeName = 'dark' | 'light'
 
@@ -24,6 +25,7 @@ const AppRouter = () => {
   return (
     <Admin
       dataProvider={dataProvider}
+      i18nProvider={i18nProvider}
       dashboard={Dashboard}
       layout={CustomLayout}
       theme={createThemeHelper(theme)}
